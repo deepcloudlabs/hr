@@ -1,0 +1,116 @@
+<p>
+<div id="app" class="container">
+  <div class="panel panel-primary">
+    <div class="panel-heading">
+      <div class="row">
+        <div class="col-md-10">
+          <h3 class="panel-title">Employee Panel</h3>
+        </div>
+      </div>
+    </div>
+    <div class="panel-body">
+      <div class="form-group">
+        <label for="identityNo">Identity No</label>
+        <input type="text" id="identityNo"
+               [(ngModel)]="identityNo"
+               class="form-control">
+      </div>
+      <div class="form-group">
+        <label for="fullName">Fullname</label>
+        <input type="text" id="fullName"
+               [(ngModel)]="fullname"
+               class="form-control">
+      </div>
+      <div class="form-group">
+        <label for="salary">Salary</label>
+        <input type="text" id="salary"
+               [(ngModel)]="salary" class="form-control">
+      </div>
+      <div class="form-group">
+        <label for="birthYear">Birth Year</label>
+        <input type="text" id="birthYear" [(ngModel)]="birthYear"
+               class="form-control">
+      </div>
+      <div class="form-group">
+        <label for="iban">IBAN</label>
+        <input type="text" id="iban" [(ngModel)]="iban" class="form-control">
+      </div>
+      <div class="form-group">
+        <label for="department">Department</label>
+        <select id="department" [(ngModel)]="department" class="form-control">
+          <option>IT</option>
+          <option>Finance</option>
+          <option>Sales</option>
+          <option>HR</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label for="photo">Photo</label>
+        <img id="photoImage" style="width: 64px; height: 64px;"
+           [src]="photo">
+        <label class="btn btn-info btn-file">
+          <input type="file" id="photo" style="display: none;">
+          <span>Browse</span>
+        </label>
+      </div>
+      <div class="form-group">
+        <button class="btn btn-info" (click)="addEmployee()">Add</button>
+        <button class="btn btn-warning" (click)="updateEmployee()">Update</button>
+        <button class="btn btn-danger" (click)="removeEmployee()">Remove</button>
+        <button class="btn btn-success" (click)="findEmployee()">Find</button>
+        <button class="btn btn-success" (click)="findAllEmployees()" >Find All</button>
+      </div>
+    </div>
+  </div>
+  <div *ngIf="employees.length>0" class="panel panel-success">
+    <div class="panel-heading">
+      <div class="row">
+        <div class="col-md-11">
+          <h3 class="panel-title">Employees</h3>
+        </div>
+      </div>
+    </div>
+    <div class="panel-body">
+      <table class="table table-responsive">
+        <thead>
+        <tr>
+          <th>No</th>
+          <th>Photo</th>
+          <th>Identity No</th>
+          <th>Full name</th>
+          <th>Salary</th>
+          <th>Iban</th>
+          <th>Department</th>
+          <th>Birth Year</th>
+          <th>Operations</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let emp of employees; let i= index"
+             (mouseover)="copyEmployee(emp)">
+          <td>{{i+1}}</td>
+          <td><img style="width: 32px; height: 32px; border-radius: 16px;"
+                   [src]="emp.photo"></td>
+          <td>{{emp.identityNo}}</td>
+          <td>{{emp.fullname}}</td>
+          <td>{{emp.salary}}<span class="simge-tl"> &#8378;</span></td>
+          <td>{{emp.iban}}</td>
+          <td>{{emp.department}}</td>
+          <td>{{emp.birthYear}}</td>
+          <td>
+            <button class="btn btn-danger" (click)="removeRow(emp)">Delete</button>
+          </td>
+        </tr>
+        <tr>
+          <td colspan="3"></td>
+          <td>Average Salary:</td>
+          <td><span class="label label-info">{{averageSalary}} &#8378;</span></td>
+          <td colspan="4"></td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+
